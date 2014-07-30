@@ -13,12 +13,13 @@ module MultipartErb
       compiled_source = erb_handler.call(template)
       if template.formats.include?(:html)
         # output HTML
+        "MultipartErb::Multipart.to_html(begin;#{compiled_source};end).html_safe"
       else # text
         # output text
+        "MultipartErb::Multipart.to_text(begin;#{compiled_source};end).html_safe"
       end
-      "MultipartErb::Multipart.to_html(begin;#{compiled_source};end).html_safe"
     end
   end
 end
 
-ActionView::Template.register_template_handler :multiparterb, MultipartErb::Handler.new
+ActionView::Template.register_template_handler :multipart, MultipartErb::Handler.new

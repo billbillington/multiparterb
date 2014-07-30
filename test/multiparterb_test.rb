@@ -5,7 +5,7 @@ class Notifier < ActionMailer::Base
 
   layout false
 
-  # want this to output both html and text, unless gem option given to give preferance
+  # TODO: want this to output both html and text, unless gem option given to give preferance
   # mail(:to => @recipient, :from => "john.doe@example.com")
 
   def contact(recipient, format_type)
@@ -37,9 +37,6 @@ class Notifier < ActionMailer::Base
 end
 
 class MultipartErbTest < ActiveSupport::TestCase
-  setup do
-  end
-
   test "plain text should be sent as a plain text" do
     email = Notifier.contact("you@example.com", :text)
     assert_equal "text/plain", email.mime_type
