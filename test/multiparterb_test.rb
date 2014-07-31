@@ -37,6 +37,11 @@ class Notifier < ActionMailer::Base
 end
 
 class MultipartErbTest < ActiveSupport::TestCase
+  setup do
+    MultipartErb.html_formatter = MyHTMLFormatter.new
+    MultipartErb.text_formatter = MyTextFormatter.new
+  end
+
   test "plain text should be sent as a plain text" do
     email = Notifier.contact("you@example.com", :text)
     assert_equal "text/plain", email.mime_type

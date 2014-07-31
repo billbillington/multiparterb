@@ -3,8 +3,6 @@ require "action_view/template"
 require "multiparterb/formatter"
 require "multiparterb/railtie"
 require "multiparterb/formatters/base_formatter"
-require "multiparterb/formatters/html_formatter"
-require "multiparterb/formatters/text_formatter"
 
 require 'nokogiri'
 

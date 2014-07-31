@@ -12,25 +12,25 @@ module MultipartErb
   # <ul>
   #   <li>This is a list</li>
   # </ul>
+
   class Formatter
     def self.parse(text, formatter)
       result = ""
       html_doc = Nokogiri::HTML text
       if heading = html_doc.at_css('h1')
         result << formatter.email_heading(heading.content)
-      elsif heading = html_doc.at_css('p')
+      end
+      if heading = html_doc.at_css('p')
         result << formatter.email_text(heading.content)
       end
       result
     end
 
     def self.to_html(compiled_source)
-      MultipartErb.html_formatter ||= HTMLFormatter.new
       parse compiled_source, MultipartErb.html_formatter
     end
 
     def self.to_text(compiled_source)
-      MultipartErb.text_formatter ||= TextFormatter.new
       parse compiled_source, MultipartErb.text_formatter
     end
   end
