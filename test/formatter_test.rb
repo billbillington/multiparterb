@@ -2,11 +2,15 @@ require "test_helper"
 
 class MyHTMLFormatter < BaseFormatter
   def email_heading(text)
-    content_tag :h2, text
+    content_tag :h1, text
   end
 
   def email_text(text=nil, &block)
     content_tag :p, super
+  end
+
+  def anchor(text, href)
+    content_tag :a, text, href: href
   end
 end
 
@@ -18,6 +22,10 @@ class MyTextFormatter < BaseFormatter
   def email_text(text=nil, &block)
     text + "\n"
   end
+
+  def anchor(text, ref)
+    text
+  end
 end
 
 # TODO: The idea will be to require the user to provide this as a callback
@@ -26,11 +34,11 @@ class FormatterTest < ActiveSupport::TestCase
     MultipartErb.html_formatter = MyHTMLFormatter.new
     MultipartErb.text_formatter = MyTextFormatter.new
 
-    @template = "<h1>test</h1><p>body</p>"
+    @template = "<h1>test</h1><p>body with a <a href='foo'>link</a></p>"
   end
 
   test 'formatted html output' do
-    assert_equal "<h2>test</h2><p>body</p>", MultipartErb::Formatter.to_html(@template).strip
+    assert_equal @template, MultipartErb::Formatter.to_html(@template).strip
   end
 
   test 'formatted text output' do

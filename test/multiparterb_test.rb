@@ -45,13 +45,13 @@ class MultipartErbTest < ActiveSupport::TestCase
   test "plain text should be sent as a plain text" do
     email = Notifier.contact("you@example.com", :text)
     assert_equal "text/plain", email.mime_type
-    #assert_equal "Dual templates **rocks**!", email.body.encoded.strip
+    assert_equal "Contact Heading", email.body.encoded.strip
   end
 
   test "html should be sent as html" do
     email = Notifier.contact("you@example.com", :html)
     assert_equal "text/html", email.mime_type
-    #assert_equal "<p>Dual templates <strong>rocks</strong>!</p>", email.body.encoded.strip
+    assert_equal "<h2>Contact Heading</h2>", email.body.encoded.strip
   end
 
   test 'dealing with multipart e-mails' do
@@ -59,32 +59,20 @@ class MultipartErbTest < ActiveSupport::TestCase
     assert_equal 2, email.parts.size
     assert_equal "multipart/alternative", email.mime_type
     assert_equal "text/plain", email.parts[0].mime_type
-    #assert_equal "Dual templates **rocks**!", email.parts[0].body.encoded.strip
+    assert_equal "Contact Heading", email.parts[0].body.encoded.strip
     assert_equal "text/html", email.parts[1].mime_type
-    #assert_equal "<p>Dual templates <strong>rocks</strong>!</p>", email.parts[1].body.encoded.strip
+    assert_equal "<h2>Contact Heading</h2>", email.parts[1].body.encoded.strip
   end
 
-  test "with a custom renderer" do
-    email = Notifier.contact("you@example.com", :html)
-    assert_equal "text/html", email.mime_type
-    #assert_equal "<p>TEST<strong>TEST</strong>TEST</p>", email.body.encoded.strip
-  end
-
-  test "with a custom renderer and options" do
-    email = Notifier.contact("you@example.com", :html)
-    assert_equal "text/html", email.mime_type
-    #assert_equal "<p>TEST Dual templates <strong>TEST rocks</strong>TEST !</p>", email.body.encoded.strip
-  end
-
-  test 'with custom processing options' do
+  test 'with link' do
     email = Notifier.link(:html)
     assert_equal "text/html", email.mime_type
-    #assert_equal '<p>Hello from <a href="http://www.fcstpauli.com">http://www.fcstpauli.com</a></p>', email.body.encoded.strip
+    assert_equal "<p>A link to <a href='https://econsultancy.com'>Econsultancy</a></p>", email.body.encoded.strip
   end
 
   test 'with partial' do
     email = Notifier.user(:html)
     assert_equal "text/html", email.mime_type
-    #assert_equal '<p>woot! <strong>Partial</strong></p>', email.body.encoded.strip
+    #assert_equal '<p>User template rendering a partial User Info Partial</p>', email.body.encoded.strip
   end
 end

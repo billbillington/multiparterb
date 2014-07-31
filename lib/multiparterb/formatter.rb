@@ -17,11 +17,21 @@ module MultipartErb
     def self.parse(text, formatter)
       result = ""
       html_doc = Nokogiri::HTML text
+
       if heading = html_doc.at_css('h1')
         result << formatter.email_heading(heading.content)
       end
       if heading = html_doc.at_css('p')
         result << formatter.email_text(heading.content)
+      end
+      if heading = html_doc.at_css('a')
+        result << formatter.anchor(
+          heading.content,
+          heading.attributes['href'].content
+        )
+      end
+      if heading = html_doc.at_css('ul')
+        result << formatter.unordered_list(heading.content)
       end
       result
     end
