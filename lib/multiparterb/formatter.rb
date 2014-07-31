@@ -31,12 +31,12 @@ module MultipartErb
           result << formatter.email_text(parse(child, formatter).html_safe)
         when 'a'
           result << formatter.anchor(
-            child.text.html_safe,
+            child.text,
             child.attributes['href'].content)
         when 'text'
-          result << child.text.html_safe
+          result << child.text
         else
-          result << parse(child, formatter).html_safe
+          result << parse(child, formatter)
         end
       end
 
