@@ -34,14 +34,24 @@ class FormatterTest < ActiveSupport::TestCase
     MultipartErb.html_formatter = MyHTMLFormatter.new
     MultipartErb.text_formatter = MyTextFormatter.new
 
-    @template = "<h1>Heading</h1><p>body with a link to <a href='https://econsultancy.com'>Econsultancy</a></p>"
+    @template = formatted_html_output %{
+      <h1>Heading with a link to <a href="https://econsultancy.com">Econsultancy</a></h1>
+      <p>body with a link to <a href="https://econsultancy.com">Econsultancy</a></p>
+    }
   end
 
   test 'formatted html output' do
-    assert_equal "<h1>Heading</h1><p>body with a link to <a href=\"https://econsultancy.com\">Econsultancy</a></p>", MultipartErb::Formatter.to_html(@template).strip
+    html = formatted_html_output %{
+      <h1>Heading with a link to <a href=\"https://econsultancy.com\">Econsultancy</a></h1>
+      <p>body with a link to <a href=\"https://econsultancy.com\">Econsultancy</a></p>
+    }
+    assert_equal html, MultipartErb::Formatter.to_html(@template).strip
   end
 
   test 'formatted text output' do
-    assert_equal "Heading\nbody with a link to Econsultancy (https://econsultancy.com)", MultipartErb::Formatter.to_text(@template).strip
+    text = "Heading with a link to Econsultancy (https://econsultancy.com)
+--------------------------------------------------------------
+body with a link to Econsultancy (https://econsultancy.com)"
+    assert_equal text, MultipartErb::Formatter.to_text(@template).strip
   end
 end

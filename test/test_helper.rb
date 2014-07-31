@@ -13,3 +13,7 @@ require "multiparterb"
 
 # Avoid annoying warning from I18n.
 I18n.enforce_available_locales = false
+
+def formatted_html_output(text)
+  text.gsub(/\n +/, '')
+end
