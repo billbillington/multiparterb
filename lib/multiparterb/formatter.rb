@@ -24,20 +24,20 @@ module MultipartErb
       result = ""
 
       node.children.each do |child|
-        case child.name
-        when 'h1'
-          result << formatter.email_heading(parse(child, formatter).html_safe)
-        when 'p'
-          result << formatter.email_text(parse(child, formatter).html_safe)
-        when 'a'
-          result << formatter.anchor(
-            parse(child, formatter).html_safe,
-            child.attributes['href'].content)
-        when 'text'
-          result << child.text
-        else
-          result << parse(child, formatter)
-        end
+        result << case child.name
+                  when 'h1'
+                    formatter.email_heading(parse(child, formatter).html_safe)
+                  when 'p'
+                    formatter.email_text(parse(child, formatter).html_safe)
+                  when 'a'
+                    formatter.anchor(
+                      parse(child, formatter).html_safe,
+                      child.attributes['href'].content)
+                  when 'text'
+                    child.text
+                  else
+                    parse(child, formatter)
+                  end
       end
 
       result
