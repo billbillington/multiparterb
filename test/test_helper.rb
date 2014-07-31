@@ -2,6 +2,8 @@ require "rubygems"
 require "bundler"
 Bundler.setup
 
+require 'pry'
+
 require "minitest/autorun"
 require "active_support/test_case"
 
