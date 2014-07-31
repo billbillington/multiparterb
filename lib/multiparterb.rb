@@ -3,6 +3,8 @@ require "action_view/template"
 require "multiparterb/formatter"
 require "multiparterb/railtie"
 
+require 'nokogiri'
+
 module MultipartErb
   class Handler
     def erb_handler
