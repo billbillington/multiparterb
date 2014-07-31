@@ -31,7 +31,7 @@ module MultipartErb
           result << formatter.email_text(parse(child, formatter).html_safe)
         when 'a'
           result << formatter.anchor(
-            child.text,
+            parse(child, formatter).html_safe,
             child.attributes['href'].content)
         when 'text'
           result << child.text

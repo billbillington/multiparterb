@@ -16,7 +16,7 @@ end
 
 class MyTextFormatter < BaseFormatter
   def email_heading(text)
-    text + "\n"
+    text + "\n" + ("-" * text.length) + "\n"
   end
 
   def email_text(text=nil, &block)
@@ -37,6 +37,7 @@ class FormatterTest < ActiveSupport::TestCase
     @template = formatted_html_output %{
       <h1>Heading with a link to <a href="https://econsultancy.com">Econsultancy</a></h1>
       <p>body with a link to <a href="https://econsultancy.com">Econsultancy</a></p>
+      <a href="http://example.com">a link with a <h1>heading</h1> in</a>
     }
   end
 
@@ -44,6 +45,7 @@ class FormatterTest < ActiveSupport::TestCase
     html = formatted_html_output %{
       <h1>Heading with a link to <a href=\"https://econsultancy.com\">Econsultancy</a></h1>
       <p>body with a link to <a href=\"https://econsultancy.com\">Econsultancy</a></p>
+      <a href=\"http://example.com\">a link with a <h1>heading</h1> in</a>
     }
     assert_equal html, MultipartErb::Formatter.to_html(@template).strip
   end
@@ -51,7 +53,10 @@ class FormatterTest < ActiveSupport::TestCase
   test 'formatted text output' do
     text = "Heading with a link to Econsultancy (https://econsultancy.com)
 --------------------------------------------------------------
-body with a link to Econsultancy (https://econsultancy.com)"
+body with a link to Econsultancy (https://econsultancy.com)
+a link with a heading
+-------
+ in (http://example.com)"
     assert_equal text, MultipartErb::Formatter.to_text(@template).strip
   end
 end

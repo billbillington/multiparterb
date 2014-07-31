@@ -45,7 +45,8 @@ class MultipartErbTest < ActiveSupport::TestCase
   test "plain text should be sent as a plain text" do
     email = Notifier.contact("you@example.com", :text)
     assert_equal "text/plain", email.mime_type
-    assert_equal "Contact Heading", email.body.encoded.strip
+    #assert_equal "Contact Heading\r\n---------------\r\n\r\n", email.body.encoded.strip
+    assert_equal "Contact Heading\n---------------\n\n", email.body.raw_source
   end
 
   test "html should be sent as html" do
@@ -59,7 +60,7 @@ class MultipartErbTest < ActiveSupport::TestCase
     assert_equal 2, email.parts.size
     assert_equal "multipart/alternative", email.mime_type
     assert_equal "text/plain", email.parts[0].mime_type
-    assert_equal "Contact Heading", email.parts[0].body.encoded.strip
+    assert_equal "Contact Heading\n---------------\n\n", email.parts[0].body.raw_source
     assert_equal "text/html", email.parts[1].mime_type
     assert_equal "<h1>Contact Heading</h1>", email.parts[1].body.encoded.strip
   end
