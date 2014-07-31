@@ -11,37 +11,46 @@ module MultipartErb
   #
   # <ul>
   #   <li>This is a list</li>
+  #   <li><a href='foo'><\a><is a list</li>
   # </ul>
+  #
+  #
+  # Does not handle nested attributes within a href elements
+  # <a href="https://econsultancy.com">Econsultancy</a>
+  #
 
   class Formatter
-    def self.parse(text, formatter)
+    def self.parse(node, formatter)
       result = ""
-      html_doc = Nokogiri::HTML text
 
-      if heading = html_doc.at_css('h1')
-        result << formatter.email_heading(heading.content)
+      node.children.each do |child|
+        case child.name
+        when 'h1'
+          result << formatter.email_heading(parse(child, formatter).html_safe)
+        when 'p'
+          result << formatter.email_text(parse(child, formatter).html_safe)
+        when 'a'
+          result << formatter.anchor(
+            child.text.html_safe,
+            child.attributes['href'].content)
+        when 'text'
+          result << child.text.html_safe
+        else
+          result << parse(child, formatter).html_safe
+        end
       end
-      if heading = html_doc.at_css('p')
-        result << formatter.email_text(heading.content)
-      end
-      if heading = html_doc.at_css('a')
-        result << formatter.anchor(
-          heading.content,
-          heading.attributes['href'].content
-        )
-      end
-      if heading = html_doc.at_css('ul')
-        result << formatter.unordered_list(heading.content)
-      end
+
       result
     end
 
     def self.to_html(compiled_source)
-      parse compiled_source, MultipartErb.html_formatter
+      html_doc = Nokogiri::HTML compiled_source
+      parse html_doc, MultipartErb.html_formatter
     end
 
     def self.to_text(compiled_source)
-      parse compiled_source, MultipartErb.text_formatter
+      html_doc = Nokogiri::HTML compiled_source
+      parse html_doc, MultipartErb.text_formatter
     end
   end
 end

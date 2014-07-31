@@ -10,7 +10,7 @@ class MyHTMLFormatter < BaseFormatter
   end
 
   def anchor(text, href)
-    content_tag :a, text, href: href
+    content_tag(:a, text, href: href)
   end
 end
 
@@ -23,8 +23,8 @@ class MyTextFormatter < BaseFormatter
     text + "\n"
   end
 
-  def anchor(text, ref)
-    text
+  def anchor(text, href)
+    text + ' (' + href + ')'
   end
 end
 
@@ -34,14 +34,14 @@ class FormatterTest < ActiveSupport::TestCase
     MultipartErb.html_formatter = MyHTMLFormatter.new
     MultipartErb.text_formatter = MyTextFormatter.new
 
-    @template = "<h1>test</h1><p>body with a <a href='foo'>link</a></p>"
+    @template = "<h1>Heading</h1><p>body with a link to <a href='https://econsultancy.com'>Econsultancy</a></p>"
   end
 
   test 'formatted html output' do
-    assert_equal @template, MultipartErb::Formatter.to_html(@template).strip
+    assert_equal "<h1>Heading</h1><p>body with a link to <a href=\"https://econsultancy.com\">Econsultancy</a></p>", MultipartErb::Formatter.to_html(@template).strip
   end
 
   test 'formatted text output' do
-    assert_equal "test\nbody", MultipartErb::Formatter.to_text(@template).strip
+    assert_equal "Heading\nbody with a link to Econsultancy (https://econsultancy.com)", MultipartErb::Formatter.to_text(@template).strip
   end
 end
