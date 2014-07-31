@@ -2,6 +2,9 @@ require "action_view"
 require "action_view/template"
 require "multiparterb/formatter"
 require "multiparterb/railtie"
+require "multiparterb/formatters/base_formatter"
+require "multiparterb/formatters/html_formatter"
+require "multiparterb/formatters/text_formatter"
 
 require 'nokogiri'
 
@@ -13,15 +16,14 @@ module MultipartErb
 
     def call(template)
       compiled_source = erb_handler.call(template)
+
       if template.formats.include?(:html)
-        # output HTML
         "MultipartErb::Formatter.to_html(begin;#{compiled_source};end).html_safe"
-      else # text
-        # output text
+      else
         "MultipartErb::Formatter.to_text(begin;#{compiled_source};end).html_safe"
       end
     end
   end
 end
 
-ActionView::Template.register_template_handler :multipart, MultipartErb::Handler.new
+ActionView::Template.register_template_handler(:multipart, MultipartErb::Handler.new)
