@@ -5,8 +5,6 @@ require "multiparterb/railtie"
 
 module MultipartErb
   class Handler
-    # TODO: Not parse erb within here and get user to pre-process before
-    # using this handler, eg. my_template.multipart.erb
     def erb_handler
       @erb_handler ||= ActionView::Template.registered_template_handler(:erb)
     end
