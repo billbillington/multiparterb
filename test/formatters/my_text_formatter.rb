@@ -1,9 +1,9 @@
 class MyTextFormatter < BaseFormatter
-  def email_heading(text)
+  def heading(text)
     text + "\n" + ("-" * text.length) + "\n"
   end
 
-  def email_text(text=nil, &block)
+  def text(text=nil, &block)
     text + "\n"
   end
 

@@ -15,9 +15,9 @@ module MultipartErb
     def self.lookup(child, formatter)
       case child.name
       when 'h1'
-        formatter.email_heading(parse(child, formatter).html_safe)
+        formatter.heading(parse(child, formatter).html_safe)
       when 'p'
-        formatter.email_text(parse(child, formatter).html_safe)
+        formatter.text(parse(child, formatter).html_safe)
       when 'a'
         formatter.anchor(
           parse(child, formatter).html_safe,

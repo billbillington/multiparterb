@@ -2,11 +2,11 @@ class BaseFormatter
   include ActionView::Helpers::TagHelper
   include ActionView::Context
 
-  def email_heading(text)
+  def heading(text)
     raise NotImplementedError
   end
 
-  def email_text(text=nil, &block)
+  def text(text=nil, &block)
     text || capture(&block)
   end
 

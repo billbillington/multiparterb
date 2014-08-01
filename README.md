@@ -44,11 +44,11 @@ This example formats the elements as it finds them, standard HTML output. _(TODO
 
 ```ruby
 class MyHTMLFormatter < BaseFormatter
-  def email_heading(text)
+  def heading(text)
     content_tag :h1, text
   end
 
-  def email_text(text=nil, &block)
+  def text(text=nil, &block)
     content_tag :p, super
   end
 
@@ -62,11 +62,11 @@ And here is an example text formatter.
 
 ```ruby
 class MyTextFormatter < BaseFormatter
-  def email_heading(text)
+  def heading(text)
     "*** #{text} ***\n"
   end
 
-  def email_text(text=nil, &block)
+  def text(text=nil, &block)
     text + "\n"
   end
 
@@ -87,9 +87,9 @@ It will then call the relevent method for each element it finds in the template.
 
 The set of elements this currently supports, and the method that will get called are :
 
-* `<h1></h1>` => `email_heading`
-* `<p></p>` => `email_text`
-* `<a href="https://example.com">example</a>` => `anchor`
+* `<h1></h1>` => `Formatter#heading`
+* `<p></p>` => `Formatter#htext`
+* `<a href="https://example.com">example</a>` => `Formatter#hanchor`
 
 ### Mailers
 
