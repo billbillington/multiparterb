@@ -19,3 +19,6 @@ I18n.enforce_available_locales = false
 def formatted_html_output(text)
   text.gsub(/\n +/, '')
 end
+
+MultipartErb.html_formatter = MyHTMLFormatter.new
+MultipartErb.text_formatter = MyTextFormatter.new

@@ -3,9 +3,6 @@ require "test_helper"
 # TODO: The idea will be to require the user to provide this as a callback
 class FormatterTest < ActiveSupport::TestCase
   setup do
-    MultipartErb.html_formatter = MyHTMLFormatter.new
-    MultipartErb.text_formatter = MyTextFormatter.new
-
     @template = formatted_html_output %{
       <h1>Heading with a link to <a href="https://econsultancy.com">Econsultancy</a></h1>
       <p>body with a link to <a href="https://econsultancy.com">Econsultancy</a></p>
