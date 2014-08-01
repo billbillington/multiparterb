@@ -16,13 +16,13 @@ class Notifier < ActionMailer::Base
   end
 
   def link(format_type)
-    mail(:to => 'foo@bar.com', :from => "john.doe@example.com") do |format|
+    mail(:to => "foo@bar.com", :from => "john.doe@example.com") do |format|
       format.send(format_type)
     end
   end
 
   def user(format_type)
-    mail(:to => 'foo@bar.com', :from => "john.doe@example.com") do |format|
+    mail(:to => "foo@bar.com", :from => "john.doe@example.com") do |format|
       format.send(format_type)
     end
   end
@@ -30,8 +30,8 @@ class Notifier < ActionMailer::Base
   def multiple_format_contact(recipient)
     @recipient = recipient
     mail(:to => @recipient, :from => "john.doe@example.com", :template => "contact") do |format|
-      format.text  { render 'contact' }
-      format.html  { render 'contact' }
+      format.text  { render "contact" }
+      format.html  { render "contact" }
     end
   end
 end
@@ -51,7 +51,7 @@ class MultipartErbTest < ActiveSupport::TestCase
     assert_equal "<h1>Contact Heading</h1>", email.body.encoded.strip
   end
 
-  test 'dealing with multipart e-mails' do
+  test "dealing with multipart e-mails" do
     email = Notifier.multiple_format_contact("you@example.com")
     assert_equal 2, email.parts.size
     assert_equal true, email.multipart?
@@ -62,15 +62,15 @@ class MultipartErbTest < ActiveSupport::TestCase
     assert_equal "<h1>Contact Heading</h1>", email.parts[1].body.encoded.strip
   end
 
-  test 'with link' do
+  test "with link" do
     email = Notifier.link(:html)
     assert_equal "text/html", email.mime_type
     assert_equal "<p>A link to <a href=\"https://econsultancy.com\">Econsultancy</a></p>", email.body.encoded.strip
   end
 
-  test 'with partial' do
+  test "with partial" do
     email = Notifier.user(:html)
     assert_equal "text/html", email.mime_type
-    assert_equal '<p>User template rendering a partial </p><p>User Info Partial</p>', email.body.encoded.strip
+    assert_equal "<p>User template rendering a partial </p><p>User Info Partial</p>", email.body.encoded.strip
   end
 end
