@@ -5,26 +5,28 @@ module MultipartErb
 
   class Formatter
     def self.parse(node, formatter)
-      result = ""
-
-      node.children.each do |child|
-        result << case child.name
-                  when 'h1'
-                    formatter.email_heading(parse(child, formatter).html_safe)
-                  when 'p'
-                    formatter.email_text(parse(child, formatter).html_safe)
-                  when 'a'
-                    formatter.anchor(
-                      parse(child, formatter).html_safe,
-                      child.attributes['href'].content)
-                  when 'text'
-                    child.text
-                  else
-                    parse(child, formatter)
-                  end
+      "".tap do |result|
+        node.children.each do |child|
+          result << lookup(child, formatter)
+        end
       end
+    end
 
-      result
+    def self.lookup(child, formatter)
+      case child.name
+      when 'h1'
+        formatter.email_heading(parse(child, formatter).html_safe)
+      when 'p'
+        formatter.email_text(parse(child, formatter).html_safe)
+      when 'a'
+        formatter.anchor(
+          parse(child, formatter).html_safe,
+          child.attributes['href'].content)
+      when 'text'
+        child.text
+      else
+        parse(child, formatter)
+      end
     end
 
     def self.to_html(compiled_source)
