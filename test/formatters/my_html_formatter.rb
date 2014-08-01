@@ -1,4 +1,4 @@
-class MyHTMLFormatter < BaseFormatter
+class MyHTMLFormatter < MultipartErb::BaseFormatter
   def heading(text)
     content_tag :h1, text
   end

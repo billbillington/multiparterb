@@ -43,7 +43,7 @@ This is derived from a base class `BaseFormatter` provided by MultipartErb, any 
 This example formats the elements as it finds them, standard HTML output. _(TODO: Maybe provide this as standard?)_
 
 ```ruby
-class MyHTMLFormatter < BaseFormatter
+class MyHTMLFormatter < MultipartErb::BaseFormatter
   def heading(text)
     content_tag :h1, text
   end
@@ -61,7 +61,7 @@ end
 And here is an example text formatter.
 
 ```ruby
-class MyTextFormatter < BaseFormatter
+class MyTextFormatter < MultipartErb::BaseFormatter
   def heading(text)
     "*** #{text} ***\n"
   end

@@ -1,4 +1,4 @@
-class MyTextFormatter < BaseFormatter
+class MyTextFormatter < MultipartErb::BaseFormatter
   def heading(text)
     text + "\n" + ("-" * text.length) + "\n"
   end
