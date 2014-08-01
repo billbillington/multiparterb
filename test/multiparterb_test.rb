@@ -5,9 +5,6 @@ class Notifier < ActionMailer::Base
 
   layout false
 
-  # TODO: want this to output both html and text, unless gem option given to give preferance
-  # mail(:to => @recipient, :from => "john.doe@example.com")
-
   def contact(recipient, format_type)
     @recipient = recipient
     mail(:to => @recipient, :from => "john.doe@example.com") do |format|
@@ -18,6 +15,13 @@ class Notifier < ActionMailer::Base
   def link(format_type)
     mail(:to => "foo@bar.com", :from => "john.doe@example.com") do |format|
       format.send(format_type)
+    end
+  end
+
+  def welcome
+    mail do |format|
+      format.html
+      format.text
     end
   end
 
@@ -60,6 +64,17 @@ class MultipartErbTest < ActiveSupport::TestCase
     assert_equal "Contact Heading\n---------------\n\n", email.parts[0].body.raw_source
     assert_equal "text/html", email.parts[1].mime_type
     assert_equal "<h1>Contact Heading</h1>", email.parts[1].body.encoded.strip
+  end
+
+  test "format order is not important and default markup is text" do
+    email = Notifier.welcome
+    assert_equal 2, email.parts.size
+    assert_equal true, email.multipart?
+    assert_equal "multipart/alternative", email.mime_type
+    assert_equal "text/plain", email.parts[0].mime_type
+    assert_equal "Welcome\n\n", email.parts[0].body.raw_source
+    assert_equal "text/html", email.parts[1].mime_type
+    assert_equal "<p>Welcome\r\n</p>", email.parts[1].body.encoded.strip
   end
 
   test "with link" do
