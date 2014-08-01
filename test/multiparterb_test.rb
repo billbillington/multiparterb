@@ -41,7 +41,6 @@ class MultipartErbTest < ActiveSupport::TestCase
     email = Notifier.contact("you@example.com", :text)
     assert_equal "text/plain", email.mime_type
     assert_equal false, email.multipart?
-    #assert_equal "Contact Heading\r\n---------------\r\n\r\n", email.body.encoded.strip
     assert_equal "Contact Heading\n---------------\n\n", email.body.raw_source
   end
 
@@ -49,7 +48,6 @@ class MultipartErbTest < ActiveSupport::TestCase
     email = Notifier.contact("you@example.com", :html)
     assert_equal "text/html", email.mime_type
     assert_equal false, email.multipart?
-    #assert_equal "Contact Heading\r\n---------------\r\n\r\n", email.body.encoded.strip
     assert_equal "<h1>Contact Heading</h1>", email.body.encoded.strip
   end
 
@@ -73,6 +71,6 @@ class MultipartErbTest < ActiveSupport::TestCase
   test 'with partial' do
     email = Notifier.user(:html)
     assert_equal "text/html", email.mime_type
-    #assert_equal '<p>User template rendering a partial User Info Partial</p>', email.body.encoded.strip
+    assert_equal '<p>User template rendering a partial </p><p>User Info Partial</p>', email.body.encoded.strip
   end
 end
