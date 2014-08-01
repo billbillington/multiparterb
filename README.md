@@ -79,6 +79,7 @@ end
 Then you need to tell MultipartErb which formatters you want it to use.
 
 ```ruby
+# ./config/initializers/multiparterb.rb
 MultipartErb.html_formatter = MyHTMLFormatter.new
 MultipartErb.text_formatter = MyTextFormatter.new
 ```
