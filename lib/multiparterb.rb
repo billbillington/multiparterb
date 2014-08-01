@@ -17,8 +17,10 @@ module MultipartErb
 
       if template.formats.include?(:html)
         "MultipartErb::Formatter.to_html(begin;#{compiled_source};end).html_safe"
-      else
+      elsif template.formats.include?(:text)
         "MultipartErb::Formatter.to_text(begin;#{compiled_source};end).html_safe"
+      else
+        compiled_source
       end
     end
   end
