@@ -3,22 +3,6 @@ module MultipartErb
   @@html_formatter = nil
   @@text_formatter = nil
 
-  # Template Format
-  #
-  # <h1>This is a heading</h1>            #=> email_heading
-  #
-  # <p>Normal paragraph tag</p>           #=> email_text
-  #
-  # <ul>
-  #   <li>This is a list</li>
-  #   <li><a href='foo'><\a><is a list</li>
-  # </ul>
-  #
-  #
-  # Does not handle nested attributes within a href elements
-  # <a href="https://econsultancy.com">Econsultancy</a>
-  #
-
   class Formatter
     def self.parse(node, formatter)
       result = ""
