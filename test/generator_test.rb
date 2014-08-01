@@ -9,8 +9,6 @@ class GeneratorTest < Rails::Generators::TestCase
   test "assert all views are properly created with given name" do
     run_generator %w(notifier foo bar baz)
 
-    # TODO: would be nice to have .erb as the pre-processor in the file name
-    # assert_file "app/views/notifier/foo.multipart.erb"
     assert_file "app/views/notifier/foo.multipart"
     assert_file "app/views/notifier/bar.multipart"
     assert_file "app/views/notifier/baz.multipart"
