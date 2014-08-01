@@ -136,8 +136,6 @@ Html version
 
 * The `contact.multipart` template should not have a format in its name. Adding a format would make it unavailable to be rendered in different formats;
 
-* The order of the parts matter. It is important for e-mail clients that you call `format.text` before you call `format.html`;
-
 * you can normally use ERb inside the template.
 
 
