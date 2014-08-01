@@ -31,9 +31,8 @@ class Notifier < ActionMailer::Base
     end
   end
 
-  def multiple_format_contact(recipient)
-    @recipient = recipient
-    mail(:to => @recipient, :from => "john.doe@example.com", :template => "contact") do |format|
+  def multiple_format_contact
+    mail(:to => "you@example.com", :from => "john.doe@example.com", :template => "contact") do |format|
       format.text  { render "contact" }
       format.html  { render "contact" }
     end
@@ -56,7 +55,7 @@ class MultipartErbTest < ActiveSupport::TestCase
   end
 
   test "dealing with multipart e-mails" do
-    email = Notifier.multiple_format_contact("you@example.com")
+    email = Notifier.multiple_format_contact
     assert_equal 2, email.parts.size
     assert_equal true, email.multipart?
     assert_equal "multipart/alternative", email.mime_type
