@@ -1,4 +1,4 @@
-# MultipartErb
+# MultipartErb [![Build Status](https://travis-ci.org/econsultancy/multiparterb.svg?branch=master)](https://travis-ci.org/econsultancy/multiparterb) [![Gem Version](https://badge.fury.io/rb/multiparterb.svg)](http://badge.fury.io/rb/multiparterb) 
 
 **MultipartErb** allows you to render multipart e-mails from a single template.
 
