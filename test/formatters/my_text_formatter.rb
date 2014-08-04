@@ -4,7 +4,7 @@ class MyTextFormatter < MultipartErb::BaseFormatter
   end
 
   def text(text)
-    text + "\n"
+    text
   end
 
   def anchor(text, href)

@@ -71,7 +71,7 @@ class MultipartErbTest < ActiveSupport::TestCase
     assert_equal true, email.multipart?
     assert_equal "multipart/alternative", email.mime_type
     assert_equal "text/plain", email.parts[0].mime_type
-    assert_equal "Welcome\n\n", email.parts[0].body.raw_source
+    assert_equal "Welcome\n", email.parts[0].body.raw_source
     assert_equal "text/html", email.parts[1].mime_type
     assert_equal "<p>Welcome\r\n</p>", email.parts[1].body.encoded.strip
   end
