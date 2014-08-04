@@ -3,6 +3,15 @@ Heading with a link to Econsultancy (https://econsultancy.com)
 
 body with a link to Econsultancy (https://econsultancy.com)
 
-a link with a heading
--------
- in (http://example.com)
+a link (http://example.com)
+
+A link within p tags (http://example.com)
+
+
+Some text not within p tags
+
+Some text
+spanning many
+lines
+
+
