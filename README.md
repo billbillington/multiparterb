@@ -1,4 +1,4 @@
-# MultipartErb [![Build Status](https://travis-ci.org/econsultancy/multiparterb.svg?branch=master)](https://travis-ci.org/econsultancy/multiparterb) [![Gem Version](https://badge.fury.io/rb/multiparterb.svg)](http://badge.fury.io/rb/multiparterb) 
+# MultipartErb [![Build Status](https://travis-ci.org/econsultancy/multiparterb.svg?branch=master)](https://travis-ci.org/econsultancy/multiparterb) [![Gem Version](https://badge.fury.io/rb/multiparterb.svg)](http://badge.fury.io/rb/multiparterb)
 
 **MultipartErb** allows you to render multipart e-mails from a single template.
 
@@ -45,11 +45,11 @@ This example formats the elements as it finds them, standard HTML output. _(TODO
 ```ruby
 class MyHTMLFormatter < MultipartErb::BaseFormatter
   def heading(text)
-    content_tag :h1, text
+    content_tag(:h1, text)
   end
 
   def text(text)
-    content_tag :p, super
+    content_tag(:p, text)
   end
 
   def anchor(text, href)
@@ -67,7 +67,7 @@ class MyTextFormatter < MultipartErb::BaseFormatter
   end
 
   def text(text)
-    text + "\n"
+    text
   end
 
   def anchor(text, href)
@@ -91,6 +91,8 @@ The set of elements this currently supports, and the method that will get called
 * `<h1></h1>` => `Formatter#heading`
 * `<p></p>` => `Formatter#htext`
 * `<a href="https://example.com">example</a>` => `Formatter#hanchor`
+* `<ul></ul>` => `Formatter#unordered_list`
+* `<li></li>` => `Formatter#list_item`
 
 ### Mailers
 
@@ -111,7 +113,6 @@ end
 It will generate two parts, one in text and another in html when delivered.
 
 If you only wanted to text or html part, then just remove the `format` you don't want.
-
 
 ### Output
 
@@ -137,8 +138,7 @@ Html version
 
 * The `contact.multipart` template should not have a format in its name. Adding a format would make it unavailable to be rendered in different formats;
 
-* you can normally use ERb inside the template.
-
+* You can use ERb inside the template, which gets parsed before the formatting occurs.
 
 ## Bug reports
 
