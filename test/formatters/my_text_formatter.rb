@@ -3,7 +3,7 @@ class MyTextFormatter < MultipartErb::BaseFormatter
     text + "\n" + ("-" * text.length) + "\n"
   end
 
-  def text(text=nil, &block)
+  def text(text)
     text + "\n"
   end
 
