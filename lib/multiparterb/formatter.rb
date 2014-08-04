@@ -18,6 +18,10 @@ module MultipartErb
         formatter.heading(parse(child, formatter).html_safe)
       when 'p'
         formatter.text(parse(child, formatter).html_safe)
+      when 'ul'
+        formatter.unordered_list(parse(child, formatter).html_safe)
+      when 'li'
+        formatter.list_item(parse(child, formatter).html_safe)
       when 'a'
         formatter.anchor(
           parse(child, formatter).html_safe,

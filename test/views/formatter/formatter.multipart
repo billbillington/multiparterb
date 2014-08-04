@@ -10,3 +10,9 @@ Some text not within p tags
 spanning many
 lines
 </p>
+
+<ul>
+<li>Lists</li>
+  <li>Work</li>
+  <li>Fine</li>
+</ul>

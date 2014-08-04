@@ -18,5 +18,9 @@ module MultipartErb
     def unordered_list(text)
       raise NotImplementedError
     end
+
+    def list_item(text)
+      raise NotImplementedError
+    end
   end
 end

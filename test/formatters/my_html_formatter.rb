@@ -10,4 +10,12 @@ class MyHTMLFormatter < MultipartErb::BaseFormatter
   def anchor(text, href)
     content_tag(:a, text, href: href)
   end
+
+  def unordered_list(text)
+    content_tag(:ul, text)
+  end
+
+  def list_item(text)
+    content_tag(:li, text)
+  end
 end
