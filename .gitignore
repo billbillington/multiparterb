@@ -1,2 +1,5 @@
 .bundle
 test/tmp
+*.gem
+.ruby-version
+Gemfile.lock
