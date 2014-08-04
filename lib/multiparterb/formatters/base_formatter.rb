@@ -7,8 +7,8 @@ module MultipartErb
       raise NotImplementedError
     end
 
-    def text(text=nil, &block)
-      text || capture(&block)
+    def text(text)
+      raise NotImplementedError
     end
 
     def anchor(text, href)

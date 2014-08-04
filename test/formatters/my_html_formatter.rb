@@ -3,8 +3,8 @@ class MyHTMLFormatter < MultipartErb::BaseFormatter
     content_tag :h1, text
   end
 
-  def text(text=nil, &block)
-    content_tag :p, super
+  def text(text)
+    content_tag :p, text
   end
 
   def anchor(text, href)
