@@ -7,7 +7,7 @@ module MultipartErb
       raise NotImplementedError
     end
 
-    def text(text)
+    def paragraph(text)
       raise NotImplementedError
     end
 

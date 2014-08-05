@@ -48,7 +48,7 @@ class MyHTMLFormatter < MultipartErb::BaseFormatter
     content_tag(:h1, text)
   end
 
-  def text(text)
+  def paragraph(text)
     content_tag(:p, text)
   end
 
@@ -66,7 +66,7 @@ class MyTextFormatter < MultipartErb::BaseFormatter
     "*** #{text} ***\n"
   end
 
-  def text(text)
+  def paragraph(text)
     text
   end
 

@@ -17,7 +17,7 @@ module MultipartErb
       when 'h1'
         formatter.heading(parse(child, formatter).html_safe)
       when 'p'
-        formatter.text(parse(child, formatter).html_safe)
+        formatter.paragraph(parse(child, formatter).html_safe)
       when 'ul'
         formatter.unordered_list(parse(child, formatter).html_safe)
       when 'li'
