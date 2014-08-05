@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.summary     = 'Multipart templates made easy'
   s.email       = 'ian.vaughan@econsultancy.com'
-  s.homepage    = 'http://github.com/'
+  s.homepage    = 'http://github.com/econsultancy/multiparterb'
   s.description = 'Multipart templates made easy'
   s.authors     = ['Ian Vaughan']
   s.license     = 'MIT'
