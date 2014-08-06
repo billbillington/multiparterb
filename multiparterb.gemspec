@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = MultipartErb::VERSION.dup
   s.platform    = Gem::Platform::RUBY
   s.summary     = 'Multipart templates made easy'
-  s.email       = 'ian.vaughan@econsultancy.com'
+  s.email       = 'tech@econsultancy.com'
   s.homepage    = 'http://github.com/econsultancy/multiparterb'
   s.description = 'Multipart templates made easy'
   s.authors     = ['Ian Vaughan']
