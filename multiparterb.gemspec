@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'nokogiri'
   s.add_runtime_dependency 'rails', '~> 3.2.18'
 
-  s.add_development_dependency 'pry'
+  s.add_development_dependency 'pry', '0.9.10'
 end
