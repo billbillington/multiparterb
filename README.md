@@ -88,11 +88,12 @@ It will then call the relevent method for each element it finds in the template.
 
 The set of elements this currently supports, and the method that will get called are :
 
-* `<h1></h1>` => `Formatter#heading`
-* `<p></p>` => `Formatter#htext`
-* `<a href="https://example.com">example</a>` => `Formatter#hanchor`
-* `<ul></ul>` => `Formatter#unordered_list`
-* `<li></li>` => `Formatter#list_item`
+* `<h1>text</h1>` => `Formatter#heading(text)`
+* `<p>text</p>` => `Formatter#paragraph(text)`
+* `<a href="https://example.com">text</a>` => `Formatter#anchor(text, href)`
+* `<ul>text</ul>` => `Formatter#unordered_list(text)`
+* `<li>text</li>` => `Formatter#list_item(text)`
+* `<strong>text</strong>` => `Formatter#strong(text)`
 
 ### Mailers
 
