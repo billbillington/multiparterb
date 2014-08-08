@@ -3,6 +3,16 @@ module MultipartErb
   @@html_formatter = nil
   @@text_formatter = nil
 
+  SUPPORTED_TAG_METHODS = {
+    # HTML tag => method called
+    'h1' => :heading,
+    'p' => :paragraph,
+    'ul' => :unordered_list,
+    'li' => :list_item,
+    'strong' => :strong,
+    'a' => :anchor,
+  }
+
   class Formatter
     def self.parse(node, formatter)
       "".tap do |result|
@@ -13,23 +23,17 @@ module MultipartErb
     end
 
     def self.lookup(child, formatter)
-      case child.name
-      when 'h1'
-        formatter.heading(parse(child, formatter).html_safe)
-      when 'p'
-        formatter.paragraph(parse(child, formatter).html_safe)
-      when 'ul'
-        formatter.unordered_list(parse(child, formatter).html_safe)
-      when 'li'
-        formatter.list_item(parse(child, formatter).html_safe)
-      when 'a'
-        formatter.anchor(
-          parse(child, formatter).html_safe,
-          child.attributes['href'].content)
-      when 'text'
-        child.text
+      return child.text if child.name == 'text'
+      parsed_text = parse(child, formatter).html_safe
+
+      if SUPPORTED_TAG_METHODS.keys.include?(child.name)
+        if child.name == 'a'
+          formatter.public_send(SUPPORTED_TAG_METHODS[child.name], parsed_text, child.attributes['href'].content)
+        else
+          formatter.public_send(SUPPORTED_TAG_METHODS[child.name], parsed_text)
+        end
       else
-        parse(child, formatter)
+        parsed_text
       end
     end
 
