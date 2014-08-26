@@ -4,7 +4,7 @@ class MyHTMLFormatter < MultipartErb::BaseFormatter
   end
 
   def paragraph(text)
-    content_tag(:p, text)
+    content_tag(:h2, text)
   end
 
   def anchor(text, href)
