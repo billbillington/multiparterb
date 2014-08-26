@@ -2,9 +2,9 @@
 <p>body with a link to <a href="https://econsultancy.com">Econsultancy</a></p>
 <a href="http://example.com">a link</a>
 
-<p><a href="http://example.com">A link within p tags</a></p>
+<p><a href="http://example.com">A link within tags</a></p>
 
-Some text not within p tags
+Some text not within tags
 
 <p>Some text
 spanning many

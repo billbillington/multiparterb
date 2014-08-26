@@ -4,9 +4,9 @@ Heading with a link to Econsultancy (https://econsultancy.com)
 body with a link to Econsultancy (https://econsultancy.com)
 a link (http://example.com)
 
-A link within p tags (http://example.com)
+A link within tags (http://example.com)
 
-Some text not within p tags
+Some text not within tags
 
 Some text
 spanning many
