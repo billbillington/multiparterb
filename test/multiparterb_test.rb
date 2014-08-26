@@ -86,5 +86,7 @@ class MultipartErbTest < ActiveSupport::TestCase
     email = Notifier.user(:html)
     assert_equal "text/html", email.mime_type
     assert_equal "<h2>User template rendering a partial</h2>\r\n<h2>User Info Partial</h2>", email.body.encoded.strip
+    email = Notifier.user(:text)
+    assert_equal "User template rendering a partial\r\nUser Info Partial", email.body.encoded.strip
   end
 end
