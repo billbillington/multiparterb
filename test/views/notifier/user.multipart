@@ -1,1 +1,2 @@
-<p>User template rendering a partial <%= render :partial => 'user_info' %></p>
+<p>User template rendering a partial</p>
+<%= render :partial => 'user_info' %>
