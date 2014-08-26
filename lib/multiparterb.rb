@@ -33,3 +33,4 @@ module MultipartErb
 end
 
 ActionView::Template.register_template_handler(:multipart, MultipartErb::Handler.new)
+ActionView::Template.register_template_handler(:multiparterb, MultipartErb::Handler.new)
