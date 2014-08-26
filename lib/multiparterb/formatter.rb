@@ -38,13 +38,13 @@ module MultipartErb
     end
 
     def self.to_html(compiled_source)
-      html_doc = Nokogiri::HTML compiled_source
-      parse html_doc, MultipartErb.html_formatter
+      html_doc = Nokogiri::HTML(compiled_source)
+      parse(html_doc, MultipartErb.html_formatter)
     end
 
     def self.to_text(compiled_source)
-      html_doc = Nokogiri::HTML compiled_source
-      parse html_doc, MultipartErb.text_formatter
+      html_doc = Nokogiri::HTML(compiled_source)
+      parse(html_doc, MultipartErb.text_formatter)
     end
   end
 end
