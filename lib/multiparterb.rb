@@ -14,8 +14,7 @@ module MultipartErb
 
     def call(template)
       compiled_source = erb_handler.call(template)
-      return compiled_source if @compiled_partial
-      @compiled_partial = contains_partial?(template)
+      return compiled_source if partial?(template)
 
       if template.formats.include?(:html)
         "MultipartErb::Formatter.to_html(begin;#{compiled_source};end).html_safe"
@@ -26,8 +25,8 @@ module MultipartErb
       end
     end
 
-    def contains_partial?(template)
-      !!template.source.match(/<%= +render/)
+    def partial?(template)
+      File.basename(template.inspect)[0] == '_'
     end
   end
 end
