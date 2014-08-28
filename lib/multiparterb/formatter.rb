@@ -15,8 +15,10 @@ module MultipartErb
 
   class Formatter
     def self.parse(node, formatter)
-      "".tap do |result|
-        node.children.each do |child|
+      node.children.inject('') do |result, child|
+        if result.strip.empty?
+          lookup(child, formatter)
+        else
           result << lookup(child, formatter)
         end
       end
