@@ -86,6 +86,8 @@ MultipartErb.text_formatter = MyTextFormatter.new
 
 It will then call the relevent method for each element it finds in the template.
 
+### List of supported HTML tags
+
 The set of elements this currently supports, and the method that will get called are :
 
 * `<h1>text</h1>` => `Formatter#heading(text)`
